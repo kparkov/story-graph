@@ -34,7 +34,9 @@ The definition of an entity is dependent on the entity type, but they all share 
 
 ## Relationships
 
-Relationships can be defined between two entities, which is really what makes up the graph: these are the links (in the fantasy world, but also literal links) that connect everything together. Along with just the connection, there is also a definition of the type of the relationship. So a relationship with characters on both sides might be *child of*, *spouse*, *lover*, *enemy*, *ally*, etc., while `character -> item` might be *creator of*, *owner of*, etc. The opposite relation is automatically created when appropriate - a father automatically becomes parent of his children.
+Relationships can be defined between two entities, which is really what makes up the graph: these are the links (in the fantasy world, but also literal links) that connect everything together. Along with just the connection, there is also a definition of the type of the relationship. So a relationship with characters on both sides might be *child of*, *spouse*, *lover*, *enemy*, *ally*, etc., while `character -> item` might be *creator of*, *owner of*, etc. 
+
+Som relations are *defined*, while others are *inferred*. The opposite relation is automatically created when appropriate - a father automatically becomes parent of his children. But siblings are not defined either, they are inferred by the fact that they share the same set of parents.
 
 ## Stories
 
