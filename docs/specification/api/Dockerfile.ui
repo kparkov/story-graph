@@ -1,0 +1,5 @@
+FROM swaggerapi/swagger-ui
+
+ADD swagger.yaml .
+
+ENV SWAGGER_JSON=/swagger.yaml

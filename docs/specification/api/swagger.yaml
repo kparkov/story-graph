@@ -1,0 +1,159 @@
+swagger: '2.0'
+info:
+  title: StoryGraph API
+  description: Some
+  version: 1.0.0
+host: api.mugs.com
+schemes:
+  - https
+basePath: /v1
+produces:
+  - application/json
+paths:
+  /worlds:
+    get:
+      summary: List of worlds
+      description: Get all worlds for this user.
+      parameters:
+        - name: Authorization
+          description: Authorization token
+          in: header
+          type: string
+          required: true
+        - name: skip
+          description: Skip this amount of results before returning the firs.
+          in: query
+          type: integer
+          required: false
+        - name: limit
+          description: >-
+            Limit the amount of results this query will return. If not set, it
+            will return the rest (after skipping).
+          in: query
+          type: integer
+          required: false
+      responses:
+        '200':
+          description: Success.
+          headers:
+            SG-Collection-Count:
+              type: string
+              description: The full number of items in the World collection.
+          schema:
+            type: array
+            items:
+              allOf:
+                - $ref: '#/definitions/Model'
+                - $ref: '#/definitions/Ownership'
+                - $ref: '#/definitions/World'
+        '401':
+          description: The user was not authorized.
+          schema:
+            $ref: '#/definitions/UnauthorizedError'
+    post:
+      summary: Create a new world
+      description: This creates a new world.
+      parameters:
+        - name: Authorization
+          description: Authorization token
+          in: header
+          type: string
+          required: true
+        - name: world
+          description: The world object
+          in: body
+          schema:
+            $ref: '#/definitions/World'
+      responses:
+        '201':
+          description: CREATED
+          schema:
+            allOf:
+              - $ref: '#/definitions/Model'
+              - $ref: '#/definitions/World'
+  '/worlds/{id}':
+    get:
+      summary: Get a specific world.
+      description: This retrieves the detailed object for a specific world.
+      parameters:
+        - name: id
+          description: The world id
+          in: path
+          type: string
+          required: true
+      responses:
+        '200':
+          description: The world object
+          schema:
+            allOf:
+              - $ref: '#/definitions/Model'
+              - $ref: '#/definitions/World'
+definitions:
+  Model:
+    type: object
+    properties:
+      id:
+        type: string
+        description: 'The unique, database-generated id.'
+        example: 507f191e810c19729de860ea
+  Ownership:
+    type: object
+    properties:
+      owner:
+        type: string
+        description: The id of the owner.
+        example: 204f191e210d19729ed230ff
+  World:
+    type: object
+    properties:
+      name:
+        type: string
+        description: The world name.
+        example: Middle-earth
+      description:
+        type: string
+        description: World description.
+        example: 'The world of hobbits, orcs, elves and men.'
+  WorldEntity:
+    type: object
+    properties:
+      name:
+        type: string
+        description: The name of the entity.
+  Character:
+    type: object
+    allOf:
+      - $ref: '#/definitions/WorldEntity'
+      - properties:
+          someshiz:
+            type: string
+            description: test
+  Error:
+    type: object
+    properties:
+      name:
+        type: string
+        description: The error type name
+      message:
+        type: string
+        description: The detailed error message
+  UnauthorizedError:
+    type: object
+    description: The user was not authorized
+    allOf:
+      - $ref: '#/definitions/Error'
+      - properties:
+          name:
+            example: UnauthorizedError
+          message:
+            example: Unauthenticated or insufficient permissions.
+  NotFoundError:
+    type: object
+    description: The resource was not found.
+    allOf:
+      - $ref: '#/definitions/Error'
+      - properties:
+          name:
+            example: NotFoundError
+          message:
+            example: Resource not found.
