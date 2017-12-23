@@ -4,6 +4,7 @@ mono: none
 dotnet: 2.0.0
 
 install:
+- cd $TRAVIS_BUILD_DIR/StoryGraph
 - dotnet restore
 
 script:
