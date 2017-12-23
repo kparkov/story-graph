@@ -7,6 +7,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test", "Test\Test.csproj", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Model", "Model\Model.csproj", "{38F36328-E019-4771-A3E6-83F79FE65168}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{D741BC7A-FBDA-489B-B2B7-4EF5B589BFBA}"
+	ProjectSection(SolutionItems) = preProject
+		Dockerfile.test = Dockerfile.test
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Api", "Api\Api.csproj", "{054D9475-2DB4-477D-B692-1DF742331E87}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +28,10 @@ Global
 		{38F36328-E019-4771-A3E6-83F79FE65168}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{38F36328-E019-4771-A3E6-83F79FE65168}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{38F36328-E019-4771-A3E6-83F79FE65168}.Release|Any CPU.Build.0 = Release|Any CPU
+		{054D9475-2DB4-477D-B692-1DF742331E87}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{054D9475-2DB4-477D-B692-1DF742331E87}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{054D9475-2DB4-477D-B692-1DF742331E87}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{054D9475-2DB4-477D-B692-1DF742331E87}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

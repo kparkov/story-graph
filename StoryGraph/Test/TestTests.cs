@@ -1,7 +1,7 @@
+using KVP.StoryGraph.Model;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Model;
 
-namespace Test
+namespace KVP.StoryGraph.Test
 {
     [TestClass]
     public class TestTests
