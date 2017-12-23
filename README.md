@@ -1,5 +1,7 @@
 # StoryGraph
 
+![Build status](https://travis-ci.org/kparkov/story-graph.svg?branch=master)
+
 StoryGraph is a tool for writers or managers of fictitious / non-existing worlds: a tool that connects and defines relationships between *people*, *locations*, *items*, *groups* and *stories*.
 
 Think of it as a social network for fantasy worlds.
