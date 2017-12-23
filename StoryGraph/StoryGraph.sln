@@ -9,6 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Model", "Model\Model.csproj
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{D741BC7A-FBDA-489B-B2B7-4EF5B589BFBA}"
 	ProjectSection(SolutionItems) = preProject
+		Dockerfile = Dockerfile
 		Dockerfile.test = Dockerfile.test
 	EndProjectSection
 EndProject
