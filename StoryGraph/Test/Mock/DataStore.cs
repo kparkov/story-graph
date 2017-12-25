@@ -36,10 +36,10 @@ namespace KVP.StoryGraph.Test.Mock
 
         private List<IdRelation> _relations = new List<IdRelation>()
         {
-            new IdRelation() { Id = "A", Subject = "bilbo-baggins", Object = "frodo-baggins", Type = RelationDefinition.Uncle },
-            new IdRelation() { Id = "B", Subject = "frodo-baggins", Object = "bilbo-baggins", Type = RelationDefinition.Uncle.GetOppositeRelation() },
-            new IdRelation() { Id = "C", Subject = "frodo-baggins", Object = "sauron", Type = RelationDefinition.Enemy },
-            new IdRelation() { Id = "D", Subject = "sauron", Object = "frodo-baggins", Type = RelationDefinition.Enemy.GetOppositeRelation() }
+            new IdRelation() { Id = "A", Subject = "bilbo-baggins", Object = "frodo-baggins", Type = RelationDefinition.Creator },
+            new IdRelation() { Id = "B", Subject = "frodo-baggins", Object = "bilbo-baggins", Type = RelationDefinition.Creator.GetOppositeRelation() },
+            new IdRelation() { Id = "C", Subject = "frodo-baggins", Object = "sauron", Type = RelationDefinition.Hate },
+            new IdRelation() { Id = "D", Subject = "sauron", Object = "frodo-baggins", Type = RelationDefinition.Hate.GetOppositeRelation() }
         };
 
         private class IdRelation

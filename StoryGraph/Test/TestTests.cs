@@ -28,9 +28,9 @@ namespace KVP.StoryGraph.Test
         [TestMethod]
         public void CheckAsymmetricalRelation()
         {
-            Assert.IsTrue(RelationDefinition.Nephew.Asymmetrical());
-            Assert.IsTrue(RelationDefinition.Child.Asymmetrical());
-            Assert.IsFalse(RelationDefinition.Sibling.Asymmetrical());
+            Assert.IsTrue(RelationDefinition.CreatedBy.Asymmetrical());
+            Assert.IsTrue(RelationDefinition.Creator.Asymmetrical());
+            Assert.IsFalse(RelationDefinition.Hate.Asymmetrical());
         }
     }
 }

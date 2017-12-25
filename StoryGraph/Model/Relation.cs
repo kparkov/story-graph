@@ -11,4 +11,10 @@ namespace KVP.StoryGraph.Model
         public Entity Object { get; set; }
         public RelationDefinition Type { get; set; }
     }
+
+    public class BiRelation
+    {
+        public Relation LeftToRight { get; set; }
+        public Relation RightToLeft { get; set; }
+    }
 }

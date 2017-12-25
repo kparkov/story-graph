@@ -2,12 +2,15 @@
 {
     public enum RelationDefinition
     {
-        Parent = 1,
-        Child = ~Parent,
-        Enemy = 2,
-        Uncle = 3,
-        Nephew = ~Uncle,
-        Sibling = 4,
+        Creator = 1,
+        CreatedBy = ~Creator,
 
+        Owner = 2,
+        OwnedBy = ~Owner,
+
+        Association = 3,
+
+        Affection = 4,
+        Hate = 5,
     }
 }

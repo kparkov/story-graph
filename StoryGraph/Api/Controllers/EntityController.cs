@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using KVP.StoryGraph.Api.ViewModel;
+using KVP.StoryGraph.Business;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.SwaggerGen;
@@ -11,9 +12,15 @@ using Swashbuckle.AspNetCore.SwaggerGen;
 namespace Api.Controllers
 {
     [Produces("application/json")]
-    [Route("api/Entity")]
+    [Route("api/entity")]
     public class EntityController : Controller
     {
+        public EntityController(TestService service)
+        {
+            
+        }
+
+
         /// <summary>
         /// Get the full list of entities.
         /// </summary>
@@ -24,7 +31,26 @@ namespace Api.Controllers
         {
             return new List<Entity>()
             {
-                new Entity() { Id = "dsx", Title = "My thing", Description = "A thing indeed."}
+                new Character()
+                {
+                    Id = "adx",
+                    Name = "Kristian Videmark Parkov",
+                    Creation = new DateTime(1980, 08, 09),
+                    Destruction = null,
+                    Relations = new List<Relation>()
+                    {
+                        new Relation()
+                        {
+                            RelationRole = "Creator",
+                            Entity = new EntitySummary()
+                            {
+                                Type = "Character",
+                                Id = "bdx",
+                                Name = "Liva Rausch Parkov",
+                            }
+                        }
+                    }
+                }
             };
         }
     }

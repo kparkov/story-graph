@@ -1,4 +1,6 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
+using KVP.StoryGraph.Business;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -18,7 +20,7 @@ namespace KVP.StoryGraph.Api
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
-        public void ConfigureServices(IServiceCollection services)
+        public IServiceProvider ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
 
@@ -29,6 +31,9 @@ namespace KVP.StoryGraph.Api
                 var filePath = Path.Combine(PlatformServices.Default.Application.ApplicationBasePath, "Api.xml");
                 c.IncludeXmlComments(filePath);
             });
+
+            var businessServiceConfiguration = new ServiceConfiguration();
+            return businessServiceConfiguration.ConfigureIoC(services);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
