@@ -1,4 +1,5 @@
 ﻿using System;
+using KVP.StoryGraph.Utility;
 using Microsoft.Extensions.DependencyInjection;
 using StructureMap;
 
@@ -28,6 +29,7 @@ namespace KVP.StoryGraph.Business
                 //Populate the container using the service collection
 
                 config.For<TestService>().Add<TestService>().Transient();
+                config.For(typeof(ModelMapper<,>)).Add(typeof(ModelMapper<,>));
                 config.Populate(services);
             });
 
