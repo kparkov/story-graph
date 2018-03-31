@@ -4,10 +4,13 @@ mono: none
 dotnet: 2.0.0
 
 install:
-- cd $TRAVIS_BUILD_DIR
-- dotnet restore
+  - cd $TRAVIS_BUILD_DIR
+  - dotnet restore
 
 script:
-- cd $TRAVIS_BUILD_DIR
-- dotnet build
-- dotnet test Bitkompagniet.StoryGraph.Store.Tests/Bitkompagniet.StoryGraph.Store.Tests.csproj
+  - cd $TRAVIS_BUILD_DIR
+  - dotnet build
+  - dotnet test Bitkompagniet.StoryGraph.Store.Tests/Bitkompagniet.StoryGraph.Store.Tests.csproj
+
+services:
+  - mongodb
