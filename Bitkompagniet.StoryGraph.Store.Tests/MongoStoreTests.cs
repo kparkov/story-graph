@@ -6,7 +6,7 @@ using Xunit;
 
 namespace Bitkompagniet.StoryGraph.Store.Tests
 {
-    public class MemoryStoreTests
+    public class MongoStoreTests
     {
         [Fact]
         public void CanInsertToDatabase()
