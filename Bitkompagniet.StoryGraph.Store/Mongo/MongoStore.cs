@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Bitkompagniet.StoryGraph.Model;
+using MongoDB.Bson;
 using MongoDB.Driver;
 
 namespace Bitkompagniet.StoryGraph.Store.Mongo
@@ -25,12 +26,30 @@ namespace Bitkompagniet.StoryGraph.Store.Mongo
 		private IMongoCollection<MongoEntity> Entities => Database.GetCollection<MongoEntity>("Entities");
 		private IMongoCollection<MongoRelation> Relations => Database.GetCollection<MongoRelation>("Relations");
 
-		public void Add(IEntity entity)
+		public object Add(IEntity entity)
 		{
-			Entities.InsertOne(new MongoEntity 
+			var mentity = new MongoEntity
 			{
+				MongoId = (ObjectId) entity.Id,
 				Name = entity.Name
-			});
+			};
+
+			Entities.InsertOne(mentity);
+
+			return mentity.Id;
+		}
+
+		public object AddRelation(IRelation relation)
+		{
+			var mrelation = new MongoRelation
+			{
+				FromId = (ObjectId) relation.From.Id,
+				ToId = (ObjectId) relation.To.Id,
+			};
+
+			Relations.InsertOne(mrelation);
+
+			return mrelation.Id;
 		}
 
 		public IIdEnumerable<IEntity> AllEntities()
@@ -43,10 +62,22 @@ namespace Bitkompagniet.StoryGraph.Store.Mongo
 			return new DictionaryModelEnumerable<IEntity>(result);
 		}
 
+		public bool EntityExists(object id)
+		{
+			var mid = (ObjectId) id;
+
+			var result = Entities
+				.Count(x => x.MongoId == mid);
+			
+			return result > 0;
+		}
+
 		public IEntity GetEntity(object id)
 		{
+			var mid = (ObjectId) id;
+
 			var result = Entities
-				.Find(x => x.Id == id)
+				.Find(x => x.MongoId == mid)
 				.Single();
 
 			return MapEntity(result);
@@ -54,7 +85,21 @@ namespace Bitkompagniet.StoryGraph.Store.Mongo
 
 		public IIdEnumerable<IRelation> GetOutgoingRelationsOf(object id)
 		{
-			return null;
+			var mid = (ObjectId) id;
+
+			var allRelations = Relations.Find(x => true).ToList();
+
+			var result = Relations
+				.Find(x => x.FromId == mid)
+				.ToList();
+
+			foreach (var relation in result)
+			{
+				relation.From = GetEntity(relation.FromId);
+				relation.To = GetEntity(relation.ToId);
+			}
+			
+			return new DictionaryModelEnumerable<IRelation>(result);
 		}
 
 		private IEntity MapEntity(MongoEntity entity)
