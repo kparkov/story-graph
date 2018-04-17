@@ -3,7 +3,7 @@ using MongoDB.Bson.Serialization.Attributes;
 
 namespace Bitkompagniet.StoryGraph.Store.Mongo
 {
-	public class MongoEntity : MongoModel, IEntity
+	internal class MongoEntity : MongoModel, IEntity
 	{
 		public string Name { get; set; }
 

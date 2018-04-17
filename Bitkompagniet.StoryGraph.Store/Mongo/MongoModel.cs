@@ -3,7 +3,7 @@ using MongoDB.Bson.Serialization.Attributes;
 
 namespace Bitkompagniet.StoryGraph.Store.Mongo
 {
-	public abstract class MongoModel 
+	internal abstract class MongoModel 
 	{
 		[BsonId]
 		public ObjectId MongoId { get; set; } = ObjectId.GenerateNewId();

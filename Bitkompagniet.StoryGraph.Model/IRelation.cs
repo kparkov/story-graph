@@ -5,4 +5,10 @@ namespace Bitkompagniet.StoryGraph.Model
 		IEntity From { get; }
 		IEntity To { get; }
 	}
+
+	public enum RelationType
+	{
+		Undefined = 0,
+		Creator = 1,
+	}
 }

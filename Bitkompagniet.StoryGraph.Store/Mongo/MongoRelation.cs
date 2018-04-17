@@ -4,7 +4,7 @@ using MongoDB.Bson.Serialization.Attributes;
 
 namespace Bitkompagniet.StoryGraph.Store.Mongo
 {
-	public class MongoRelation : MongoModel, IRelation
+	internal class MongoRelation : MongoModel, IRelation
 	{
 		public ObjectId FromId { get; set; }
 

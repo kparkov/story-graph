@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Bitkompagniet.StoryGraph.Model;
+using Bitkompagniet.StoryGraph.Store.Common;
 using MongoDB.Bson;
 using MongoDB.Driver;
 
@@ -26,30 +27,29 @@ namespace Bitkompagniet.StoryGraph.Store.Mongo
 		private IMongoCollection<MongoEntity> Entities => Database.GetCollection<MongoEntity>("Entities");
 		private IMongoCollection<MongoRelation> Relations => Database.GetCollection<MongoRelation>("Relations");
 
-		public object Add(IEntity entity)
+		public IEntity CreateEntity(ICreateEntity entity)
 		{
 			var mentity = new MongoEntity
 			{
-				MongoId = (ObjectId) entity.Id,
 				Name = entity.Name
 			};
 
 			Entities.InsertOne(mentity);
 
-			return mentity.Id;
+			return mentity;
 		}
 
-		public object AddRelation(IRelation relation)
+		public IRelation CreateRelation(ICreateRelation relation)
 		{
 			var mrelation = new MongoRelation
 			{
-				FromId = (ObjectId) relation.From.Id,
-				ToId = (ObjectId) relation.To.Id,
+				FromId = (ObjectId) relation.FromId,
+				ToId = (ObjectId) relation.ToId,
 			};
 
 			Relations.InsertOne(mrelation);
 
-			return mrelation.Id;
+			return mrelation;
 		}
 
 		public IIdEnumerable<IEntity> AllEntities()
@@ -87,8 +87,6 @@ namespace Bitkompagniet.StoryGraph.Store.Mongo
 		{
 			var mid = (ObjectId) id;
 
-			var allRelations = Relations.Find(x => true).ToList();
-
 			var result = Relations
 				.Find(x => x.FromId == mid)
 				.ToList();
@@ -106,6 +104,20 @@ namespace Bitkompagniet.StoryGraph.Store.Mongo
 		{
 			entity.Relations = new LazyModelEnumerable<IRelation>(() => GetOutgoingRelationsOf(entity.Id));
 			return entity;
+		}
+
+		public IRelation GetRelation(object id)
+		{
+			var mid = (ObjectId) id;
+
+			var relation = Relations
+				.Find(x => x.MongoId == mid)
+				.Single();
+			
+			relation.From = GetEntity(relation.FromId);
+			relation.To = GetEntity(relation.ToId);
+
+			return relation;
 		}
 	}
 }
